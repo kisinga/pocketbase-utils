@@ -46,7 +46,7 @@ func (m *MockDB) InsertOne(collection string, data interface{}) error {
 }
 
 // NewTransation implements DB.
-func (m *MockDB) NewTransation(ctx context.Context, validate bool) (Transaction, error) {
+func (m *MockDB) NewTransation(ctx context.Context, validate bool) (transactionMethods, error) {
 	panic("unimplemented")
 }
 
@@ -55,6 +55,6 @@ func (m *MockDB) UpdateOne(collection string, query interface{}, update interfac
 	panic("unimplemented")
 }
 
-func NewMockDB() CRUD {
+func NewMockDB() crudMethods {
 	return &MockDB{}
 }

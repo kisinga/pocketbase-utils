@@ -94,19 +94,19 @@ func (t *transaction) Update(collection string, data interface{}) error {
 	panic("unimplemented")
 }
 
-func New(pb *pocketbase.PocketBase) CRUD {
+func New(pb *pocketbase.PocketBase) DB {
 	if pb == nil {
-		return &DB{
+		return DB{
 			PB: pocketbase.New(),
 		}
 	} else {
-		return &DB{
+		return DB{
 			PB: pb,
 		}
 	}
 }
 
-func (d *DB) NewTransation(ctx context.Context, validate bool) (Transaction, error) {
+func (d *DB) NewTransation(ctx context.Context, validate bool) (transactionMethods, error) {
 	return &transaction{
 		pocketbase: d.PB,
 		validate:   validate,

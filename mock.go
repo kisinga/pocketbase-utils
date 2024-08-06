@@ -55,6 +55,6 @@ func (m *MockDB) UpdateOne(collection string, query interface{}, update interfac
 	panic("unimplemented")
 }
 
-func NewMockDB() DB {
+func NewMockDB() CRUD {
 	return &MockDB{}
 }

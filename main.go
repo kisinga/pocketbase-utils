@@ -98,7 +98,7 @@ func (t *transaction) Update(collection string, data interface{}) error {
 	panic("unimplemented")
 }
 
-func New(pb *pocketbase.PocketBase) DB {
+func New(pb *pocketbase.PocketBase) CRUD {
 	if pb == nil {
 		return &db{
 			pocketbase: pocketbase.New(),

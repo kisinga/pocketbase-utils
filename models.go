@@ -2,7 +2,7 @@ package db
 
 import "context"
 
-type DB interface {
+type CRUD interface {
 	Connect() error
 	Close() error
 	InsertOne(collection string, data interface{}) error

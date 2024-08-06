@@ -1,4 +1,4 @@
-package db
+package dbUtils
 
 import (
 	"context"
@@ -12,10 +12,6 @@ import (
 	"github.com/pocketbase/pocketbase/tools/filesystem"
 )
 
-type db struct {
-	pocketbase *pocketbase.PocketBase
-}
-
 type transaction struct {
 	pocketbase *pocketbase.PocketBase
 	validate   bool
@@ -24,32 +20,32 @@ type transaction struct {
 }
 
 // DeleteAll implements DB.
-func (d *db) DeleteAll(collection string, query interface{}) error {
+func (d *DB) DeleteAll(collection string, query interface{}) error {
 	panic("unimplemented")
 }
 
 // DeleteOne implements DB.
-func (d *db) DeleteOne(collection string, query interface{}) error {
+func (d *DB) DeleteOne(collection string, query interface{}) error {
 	panic("unimplemented")
 }
 
 // FindAll implements DB.
-func (d *db) FindAll(collection string, query interface{}, result interface{}) error {
+func (d *DB) FindAll(collection string, query interface{}, result interface{}) error {
 	panic("unimplemented")
 }
 
 // FindOne implements DB.
-func (d *db) FindOne(collection string, query interface{}, result interface{}) error {
+func (d *DB) FindOne(collection string, query interface{}, result interface{}) error {
 	panic("unimplemented")
 }
 
 // InsertOne implements DB.
-func (d *db) InsertOne(collection string, data interface{}) error {
+func (d *DB) InsertOne(collection string, data interface{}) error {
 	panic("unimplemented")
 }
 
 // UpdateOne implements DB.
-func (d *db) UpdateOne(collection string, query interface{}, update interface{}) error {
+func (d *DB) UpdateOne(collection string, query interface{}, update interface{}) error {
 	panic("unimplemented")
 }
 
@@ -100,28 +96,28 @@ func (t *transaction) Update(collection string, data interface{}) error {
 
 func New(pb *pocketbase.PocketBase) CRUD {
 	if pb == nil {
-		return &db{
-			pocketbase: pocketbase.New(),
+		return &DB{
+			PB: pocketbase.New(),
 		}
 	} else {
-		return &db{
-			pocketbase: pb,
+		return &DB{
+			PB: pb,
 		}
 	}
 }
 
-func (d *db) NewTransation(ctx context.Context, validate bool) (Transaction, error) {
+func (d *DB) NewTransation(ctx context.Context, validate bool) (Transaction, error) {
 	return &transaction{
-		pocketbase: d.pocketbase,
+		pocketbase: d.PB,
 		validate:   validate,
 	}, nil
 }
 
-func (d *db) Connect() error {
-	return d.pocketbase.Start()
+func (d *DB) Connect() error {
+	return d.PB.Start()
 }
 
-func (d *db) Close() error {
+func (d *DB) Close() error {
 	return d.Close()
 }
 

@@ -1,7 +1,14 @@
-package db
+package dbUtils
 
-import "context"
+import (
+	"context"
 
+	"github.com/pocketbase/pocketbase"
+)
+
+type DB struct {
+	PB *pocketbase.PocketBase
+}
 type CRUD interface {
 	Connect() error
 	Close() error

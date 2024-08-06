@@ -1,4 +1,4 @@
-package db
+package dbUtils
 
 import (
 	"encoding/json"
